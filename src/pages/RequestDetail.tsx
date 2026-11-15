@@ -13,6 +13,7 @@ import { useApp } from "../app-context";
 import { Badge, Field, ImageField } from "../components/ui";
 import { DealPanel } from "../components/DealPanel";
 import { canAccept, dateLabel, money, offerSchema } from "../domain/models";
+import "./requests.css";
 
 export function RequestDetail() {
   const { id } = useParams();
@@ -75,7 +76,7 @@ export function RequestDetail() {
       );
   }
   return (
-    <main className="page">
+    <main className={admin ? "page" : "page student-request-detail"}>
       <Link className="back-link" to="/app">
         <ArrowLeft size={16} />
         Back to requests
@@ -90,6 +91,48 @@ export function RequestDetail() {
         </div>
         <Badge status={request.status} />
       </div>
+      {!admin && (
+        <section className="request-next-step" aria-label="What happens next">
+          <span>Your next step</span>
+          <h2>
+            {deal?.status === "completed"
+              ? "Your find is complete."
+              : deal?.status === "cancelled" || request.status === "closed"
+                ? "This request is closed."
+                : deal
+                  ? "Arrange payment and pickup."
+                  : offers.some((offer) => canAccept(offer, request))
+                    ? "An offer is ready for you."
+                    : request.status === "awaiting_confirmation"
+                      ? "Let us know you’re still interested."
+                      : request.status === "sourcing"
+                        ? "We’re looking for a suitable match."
+                        : request.status === "offer_sent"
+                          ? "Waiting for an updated offer."
+                          : "Your request is on the list."}
+          </h2>
+          <p>
+            {deal?.status === "completed"
+              ? "Payment and delivery have been recorded by the FindIt team. The agreed offer and conversation are kept here for reference."
+              : deal?.status === "cancelled" || request.status === "closed"
+                ? "See the saved reason or conversation for details. You can make a new request from your workspace."
+                : deal
+                  ? "Your offer is accepted. Use the conversation to agree on payment and delivery. The team updates the deal after verifying what happened."
+                  : offers.some((offer) => canAccept(offer, request))
+                    ? "Check the item, total price, and delivery terms below. Accept only if it works for you. You can also decline or ask a question."
+                    : request.status === "awaiting_confirmation"
+                      ? "Confirm below before we spend time sourcing this item."
+                      : request.status === "sourcing"
+                        ? "We’ll share an offer here if we find one. A match isn’t guaranteed; you can message us with questions or changes."
+                        : request.status === "offer_sent"
+                          ? "There is no offer available to accept right now. Ask the team for an update in the conversation."
+                          : "The team will review your details and may contact you before looking. No payment is due just for requesting."}
+          </p>
+          <a className="text-link" href="#request-conversation">
+            Message the FindIt team <ArrowUpRight size={14} />
+          </a>
+        </section>
+      )}
       {request.status === "awaiting_confirmation" && (
         <div className="action-banner">
           <div>
@@ -123,8 +166,8 @@ export function RequestDetail() {
       )}
       <div className="detail-layout">
         <div className="detail-main">
-          <section className="panel">
-            <h2>The wishlist</h2>
+          <section className="panel request-specification">
+            <h2>{admin ? "The wishlist" : "What you asked for"}</h2>
             <p className="preserve">{request.details}</p>
             {request.image_url && (
               <a href={request.image_url} target="_blank" rel="noreferrer">
@@ -219,37 +262,49 @@ export function RequestDetail() {
                 Valid until {new Date(offer.expires_at).toLocaleString()}
               </p>
               {!admin && canAccept(offer, request) && (
-                <div className="button-row">
-                  <button
-                    className="button"
-                    disabled={busy}
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          `Accept this item for ${money(offer.total)} under the displayed terms? Payment will be arranged separately.`,
+                <>
+                  <p className="offer-decision-note">
+                    Accepting confirms this item and the terms above. Payment is
+                    arranged separately with the team.
+                  </p>
+                  <div className="button-row">
+                    <button
+                      className="button"
+                      disabled={busy}
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `Accept this item for ${money(offer.total)} under the displayed terms? Payment will be arranged separately.`,
+                          )
                         )
-                      )
+                          run(
+                            () => repo.respondOffer(offer.id, true),
+                            "Offer accepted. Next: arrange payment and delivery.",
+                          );
+                      }}
+                    >
+                      Accept for {money(offer.total)} <Check size={16} />
+                    </button>
+                    <button
+                      className="button secondary"
+                      disabled={busy}
+                      onClick={() =>
                         run(
-                          () => repo.respondOffer(offer.id, true),
-                          "Offer accepted. Next: arrange payment and delivery.",
-                        );
-                    }}
+                          () => repo.respondOffer(offer.id, false),
+                          "Offer declined. Tell us what you’d prefer in the conversation.",
+                        )
+                      }
+                    >
+                      Not right for me
+                    </button>
+                  </div>
+                  <a
+                    className="offer-question-link"
+                    href="#request-conversation"
                   >
-                    Accept offer <Check size={16} />
-                  </button>
-                  <button
-                    className="button secondary"
-                    disabled={busy}
-                    onClick={() =>
-                      run(
-                        () => repo.respondOffer(offer.id, false),
-                        "Offer declined. Tell us what you’d prefer in the conversation.",
-                      )
-                    }
-                  >
-                    Decline
-                  </button>
-                </div>
+                    Have a question? Ask before deciding.
+                  </a>
+                </>
               )}
             </section>
           ))}
@@ -330,7 +385,7 @@ export function RequestDetail() {
               </div>
             </form>
           )}
-          <section className="panel conversation">
+          <section className="panel conversation" id="request-conversation">
             <h2>
               <MessageCircle size={20} />
               The conversation <span className="count">{messages.length}</span>
