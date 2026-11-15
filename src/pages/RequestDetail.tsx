@@ -11,13 +11,8 @@ import {
 } from "lucide-react";
 import { useApp } from "../app-context";
 import { Badge, Field, ImageField } from "../components/ui";
-import {
-  canAccept,
-  dateLabel,
-  money,
-  offerSchema,
-  type Deal,
-} from "../domain/models";
+import { DealPanel } from "../components/DealPanel";
+import { canAccept, dateLabel, money, offerSchema } from "../domain/models";
 
 export function RequestDetail() {
   const { id } = useParams();
@@ -519,81 +514,4 @@ export function RequestDetail() {
 }
 function PlusIcon() {
   return <span aria-hidden="true">+</span>;
-}
-function DealPanel({ deal, admin }: { deal: Deal; admin: boolean }) {
-  const { repo, run, busy } = useApp();
-  return (
-    <section className="panel">
-      <span className="eyebrow">YOUR DEAL</span>
-      <h2>
-        {deal.status === "completed"
-          ? "Another good find."
-          : "Let’s make it happen."}
-      </h2>
-      <div className="deal-status">
-        <span>
-          Progress: <strong>{deal.status.replaceAll("_", " ")}</strong>
-        </span>
-        <span>
-          Payment: <strong>{deal.payment.replaceAll("_", " ")}</strong>
-        </span>
-      </div>
-      {deal.note && <p className="preserve">{deal.note}</p>}
-      <p className="small-note">
-        Payment is arranged manually. An accepted offer is not proof of payment.
-        Use the conversation for delivery arrangements or cancellation requests.
-      </p>
-      {admin && (
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            const values = new FormData(event.currentTarget);
-            run(
-              () =>
-                repo.updateDeal(
-                  deal.id,
-                  String(values.get("status")) as Deal["status"],
-                  String(values.get("payment")) as Deal["payment"],
-                  String(values.get("note")),
-                ),
-              "Deal updated.",
-            );
-          }}
-        >
-          <div className="form-row">
-            <Field label="Fulfillment">
-              <select name="status" defaultValue={deal.status}>
-                {[
-                  "accepted",
-                  "arranging",
-                  "ready",
-                  "completed",
-                  "cancelled",
-                ].map((s) => (
-                  <option key={s}>{s}</option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Payment verification">
-              <select name="payment" defaultValue={deal.payment}>
-                {["unpaid", "pending_verification", "paid", "refunded"].map(
-                  (s) => (
-                    <option key={s} value={s}>
-                      {s.replaceAll("_", " ")}
-                    </option>
-                  ),
-                )}
-              </select>
-            </Field>
-          </div>
-          <Field label="Buyer-visible update / delivery confirmation">
-            <textarea name="note" maxLength={2000} defaultValue={deal.note} />
-          </Field>
-          <button className="button" disabled={busy}>
-            Save deal update
-          </button>
-        </form>
-      )}
-    </section>
-  );
 }
