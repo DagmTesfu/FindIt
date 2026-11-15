@@ -9,7 +9,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../app-context";
 import { Field, ImageField } from "../components/ui";
-import { categories, requestSchema } from "../domain/models";
+import { categories, money, requestSchema } from "../domain/models";
+import "./requests.css";
 
 export function RequestForm() {
   const { repo, run, busy, user } = useApp();
@@ -55,16 +56,18 @@ export function RequestForm() {
     }
   }
   return (
-    <main className="page">
+    <main className="page atelier-request-page">
       <Link to="/app" className="back-link">
         <ArrowLeft size={16} />
         Back to requests
       </Link>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">LET’S START THE SEARCH</span>
-          <h1>What’s on your wishlist?</h1>
-          <p>Be specific. The better the details, the better the find.</p>
+          <span className="eyebrow">Your next find starts here</span>
+          <h1>
+            Let’s put it <em>on the list.</em>
+          </h1>
+          <p>Tell us what you want. We’ll take it from there.</p>
         </div>
       </div>
       <div className="form-layout">
@@ -73,7 +76,11 @@ export function RequestForm() {
           onSubmit={submit}
           onChange={(event) => saveDraft(event.currentTarget)}
         >
-          <div className="form-section">
+          <div className="request-form-intro">
+            <span>YOUR BUYING REQUEST</span>
+            <span>Fields are required unless marked optional.</span>
+          </div>
+          <div className="form-section" id="request-item">
             <span className="section-number">01</span>
             <div>
               <h2>The item</h2>
@@ -138,7 +145,7 @@ export function RequestForm() {
               defaultValue={draft.difficulty}
             />
           </Field>
-          <div className="form-section">
+          <div className="form-section" id="request-budget">
             <span className="section-number">02</span>
             <div>
               <h2>Your budget & timing</h2>
@@ -162,7 +169,7 @@ export function RequestForm() {
               />
             </Field>
             <Field
-              label="When do you need it?"
+              label="When do you need it? (optional)"
               hint="Leave empty if your timing is flexible."
             >
               <input
@@ -184,7 +191,7 @@ export function RequestForm() {
               <option value="researching">Just researching for now</option>
             </select>
           </Field>
-          <div className="form-section">
+          <div className="form-section" id="request-contact">
             <span className="section-number">03</span>
             <div>
               <h2>Where to find you</h2>
@@ -223,22 +230,57 @@ export function RequestForm() {
               <ShieldCheck size={17} />A request isn’t a commitment to buy.
             </p>
             <button className="button" disabled={busy}>
-              {busy ? "Submitting…" : "Submit request"}
+              {busy ? "Sending your request…" : "Send my request"}
               <ArrowRight size={17} />
             </button>
           </div>
         </form>
         <aside className="form-aside">
-          <div className="tip-card">
-            <Lightbulb size={25} />
-            <h3>
-              Good details.
-              <br />
-              Better matches.
-            </h3>
+          <section
+            className="request-receipt"
+            aria-label="Your request preview"
+          >
+            <span className="eyebrow">Your list / preview</span>
+            <h2>{draft.title?.trim() || "Something worth finding."}</h2>
             <p>
-              “Headphones” is a start. “Wireless headphones under 3,000 birr
-              with a microphone” gives us something to work with.
+              {draft.details?.trim() ||
+                "The model, the color, the must-have details. This is where your request takes shape."}
+            </p>
+            <dl>
+              <div>
+                <dt>Budget up to</dt>
+                <dd>
+                  {Number(draft.budget) > 0
+                    ? money(Number(draft.budget))
+                    : "Your budget in birr"}
+                </dd>
+              </div>
+              <div>
+                <dt>Pickup / delivery area</dt>
+                <dd>{draft.location?.trim() || "Your campus or area"}</dd>
+              </div>
+            </dl>
+            <small>
+              Preview only. Your request is sent when you choose “Send my
+              request.”
+            </small>
+          </section>
+          <nav className="request-section-links" aria-label="Request sections">
+            <a href="#request-item">
+              01 <span>The item</span> ↗
+            </a>
+            <a href="#request-budget">
+              02 <span>Budget & timing</span> ↗
+            </a>
+            <a href="#request-contact">
+              03 <span>Contact details</span> ↗
+            </a>
+          </nav>
+          <div className="request-form-tip">
+            <Lightbulb size={18} />
+            <p>
+              “Wireless headphones under 3,000 birr with a microphone” helps us
+              more than just “headphones.”
             </p>
           </div>
           <div className="expectations">

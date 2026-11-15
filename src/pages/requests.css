@@ -1,0 +1,368 @@
+.atelier-request-page {
+  background: #f9faf4;
+}
+.atelier-request-page .page-heading h1 {
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -1.6px;
+}
+.atelier-request-page .page-heading h1 em {
+  font-family: Georgia, serif;
+  color: #79974d;
+  font-weight: 400;
+}
+.atelier-request-page .page-heading p {
+  color: #6c7a61;
+}
+.atelier-request-page .form-layout {
+  grid-template-columns: minmax(0, 1fr) 285px;
+  gap: 32px;
+}
+.atelier-request-page .request-form {
+  border-radius: 5px;
+  padding: 30px 34px;
+  background: #fff;
+  box-shadow: 0 9px 24px #35472b05;
+}
+.request-form-intro {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  border-bottom: 1px dashed #d5dfc8;
+  padding-bottom: 22px;
+  margin-bottom: 28px;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  color: #758b60;
+}
+.request-form-intro span:last-child {
+  font-size: 10px;
+  letter-spacing: 0;
+  max-width: 155px;
+  text-align: right;
+  line-height: 1.6;
+}
+.atelier-request-page .field > span {
+  font-size: 13px;
+  color: #475d3b;
+}
+.atelier-request-page .field small {
+  font-size: 11px;
+  color: #738265;
+}
+.atelier-request-page .field input,
+.atelier-request-page .field textarea,
+.atelier-request-page .field select {
+  font-size: 14px;
+  padding: 13px;
+  background: #fdfefb;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+.atelier-request-page .field input::placeholder,
+.atelier-request-page .field textarea::placeholder {
+  color: #87977b;
+}
+.atelier-request-page .field {
+  margin-bottom: 24px;
+}
+.atelier-request-page .section-number {
+  background: transparent;
+  border: 1px solid #dce6ce;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: #7c935f;
+}
+.atelier-request-page .form-section {
+  scroll-margin-top: 24px;
+}
+.atelier-request-page .form-section p {
+  color: #738265;
+  font-size: 12px;
+}
+.atelier-request-page .form-aside {
+  display: block;
+  position: sticky;
+  top: 24px;
+}
+.request-receipt {
+  background: #f0f6e6;
+  border: 1px solid #dce6ce;
+  border-top: 3px solid #94ac72;
+  padding: 24px;
+  border-radius: 4px;
+  box-shadow: 5px 6px 0 #eaf0df;
+}
+.request-receipt h2 {
+  font-size: 24px;
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+  margin: 20px 0 12px;
+  overflow-wrap: anywhere;
+}
+.request-receipt > p {
+  font-size: 12px;
+  color: #687c54;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.request-receipt dl > div {
+  border-top: 1px dashed #ccd9ba;
+  margin-top: 16px;
+  padding-top: 1px;
+}
+.request-receipt dt {
+  font-size: 10px;
+  color: #6d815a;
+}
+.request-receipt dd {
+  font-size: 13px;
+  color: #344f2b;
+  font-weight: 600;
+}
+.request-receipt > small {
+  display: block;
+  font-size: 10px;
+  color: #6e805e;
+  line-height: 1.7;
+  margin-top: 20px;
+}
+.request-section-links {
+  margin: 28px 0;
+}
+.request-section-links a {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid #e0e7d5;
+  font-size: 11px;
+  color: #7f9368;
+}
+.request-section-links a > span {
+  flex: 1;
+  color: #4e663e;
+  font-size: 12px;
+}
+.request-form-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #809868;
+}
+.request-form-tip p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #728362;
+}
+.atelier-request-page .expectations {
+  padding: 26px 0;
+}
+.atelier-request-page .expectations p {
+  color: #687d53;
+  font-size: 12px;
+}
+.atelier-request-page .expectations small {
+  color: #768768;
+  font-size: 11px;
+}
+.atelier-request-page .form-submit p {
+  font-size: 11px;
+  color: #6f815e;
+}
+.atelier-request-page .form-submit {
+  flex-wrap: wrap;
+}
+.student-request-detail .panel {
+  border-radius: 6px;
+  border-color: #dce5d1;
+  box-shadow: 0 7px 20px #35472b03;
+}
+.student-request-detail .page-heading h1 {
+  font-size: 36px;
+  font-weight: 600;
+}
+.student-request-detail .detail-main {
+  display: flex;
+  flex-direction: column;
+}
+.student-request-detail .request-specification {
+  order: 3;
+}
+.student-request-detail .offer-panel {
+  order: 1;
+  background: #f7faef;
+  border-top: 3px solid #92ab70;
+}
+.student-request-detail .deal-panel {
+  order: 2;
+}
+.student-request-detail .conversation {
+  order: 4;
+}
+.student-request-detail .offer-panel h2 {
+  font-size: 27px;
+}
+.student-request-detail .offer-price {
+  background: #eaf2dc;
+  padding: 22px;
+}
+.student-request-detail .offer-price strong {
+  font-size: 28px;
+}
+.student-request-detail .panel > p {
+  color: #65765a;
+}
+.student-request-detail .detail-note p {
+  color: #5e7351;
+}
+.student-request-detail .detail-facts span {
+  color: #78896a;
+}
+.student-request-detail .conversation h2 {
+  font-size: 22px;
+}
+.student-request-detail .detail-aside .panel {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  border-top: 1px solid #dce5d1;
+  padding: 22px 0;
+}
+.request-next-step {
+  border-left: 3px solid #8da968;
+  background: #edf4e2;
+  padding: 21px 24px;
+  margin: 0 0 28px;
+}
+.request-next-step > span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #71865b;
+  margin-bottom: 9px;
+}
+.request-next-step h2 {
+  font-size: 21px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.request-next-step p {
+  font-size: 13px;
+  color: #647a51;
+  max-width: 650px;
+}
+.request-next-step a {
+  margin-top: 12px;
+  color: #3e6030;
+  font-size: 12px;
+}
+.offer-decision-note {
+  font-size: 12px;
+  color: #667d54;
+  margin-top: 20px;
+  line-height: 1.8;
+}
+.offer-question-link {
+  display: inline-flex;
+  margin-top: 16px;
+  font-size: 12px;
+  color: #4d6e3a;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.student-request-detail #request-conversation {
+  scroll-margin-top: 24px;
+}
+@media (max-width: 1100px) {
+  .atelier-request-page .form-layout {
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 24px;
+  }
+  .atelier-request-page .request-form {
+    padding: 26px;
+  }
+  .request-receipt {
+    padding: 20px;
+  }
+}
+@media (max-width: 950px) {
+  .atelier-request-page .form-layout {
+    grid-template-columns: 1fr;
+  }
+  .atelier-request-page .form-aside {
+    position: static;
+    display: block;
+  }
+  .atelier-request-page .request-section-links,
+  .atelier-request-page .request-form-tip,
+  .atelier-request-page .expectations {
+    display: none;
+  }
+  .request-receipt {
+    box-shadow: none;
+  }
+  .request-receipt > p {
+    display: none;
+  }
+  .request-receipt dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .request-receipt h2 {
+    margin: 12px 0 0;
+  }
+  .request-receipt dl > div {
+    margin-top: 12px;
+  }
+}
+@media (max-width: 700px) {
+  .atelier-request-page .page-heading h1 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+  .atelier-request-page .request-form {
+    padding: 23px 19px;
+  }
+  .atelier-request-page .field input,
+  .atelier-request-page .field textarea,
+  .atelier-request-page .field select {
+    font-size: 16px;
+  }
+  .student-request-detail .page-heading h1 {
+    font-size: 30px;
+    overflow-wrap: anywhere;
+  }
+  .student-request-detail .offer-panel h2 {
+    font-size: 24px;
+  }
+  .student-request-detail .offer-price strong {
+    font-size: 27px;
+  }
+  .request-next-step {
+    padding: 19px;
+  }
+  .student-request-detail .detail-facts {
+    gap: 20px;
+  }
+  .request-form-intro {
+    letter-spacing: 0.7px;
+  }
+  .student-request-detail .detail-aside {
+    display: flex;
+  }
+  .atelier-request-page .form-submit .button {
+    width: 100%;
+  }
+}
