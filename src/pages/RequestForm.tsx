@@ -1,15 +1,10 @@
+import { RequestSummary } from "../components/RequestSummary";
 import { useState, type FormEvent } from "react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Lightbulb,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../app-context";
 import { Field, ImageField } from "../components/ui";
-import { categories, money, requestSchema } from "../domain/models";
+import { categories, requestSchema } from "../domain/models";
 import "./requests.css";
 
 export function RequestForm() {
@@ -235,74 +230,7 @@ export function RequestForm() {
             </button>
           </div>
         </form>
-        <aside className="form-aside">
-          <section
-            className="request-receipt"
-            aria-label="Your request preview"
-          >
-            <span className="eyebrow">Your list / preview</span>
-            <h2>{draft.title?.trim() || "Something worth finding."}</h2>
-            <p>
-              {draft.details?.trim() ||
-                "The model, the color, the must-have details. This is where your request takes shape."}
-            </p>
-            <dl>
-              <div>
-                <dt>Budget up to</dt>
-                <dd>
-                  {Number(draft.budget) > 0
-                    ? money(Number(draft.budget))
-                    : "Your budget in birr"}
-                </dd>
-              </div>
-              <div>
-                <dt>Pickup / delivery area</dt>
-                <dd>{draft.location?.trim() || "Your campus or area"}</dd>
-              </div>
-            </dl>
-            <small>
-              Preview only. Your request is sent when you choose “Send my
-              request.”
-            </small>
-          </section>
-          <nav className="request-section-links" aria-label="Request sections">
-            <a href="#request-item">
-              01 <span>The item</span> ↗
-            </a>
-            <a href="#request-budget">
-              02 <span>Budget & timing</span> ↗
-            </a>
-            <a href="#request-contact">
-              03 <span>Contact details</span> ↗
-            </a>
-          </nav>
-          <div className="request-form-tip">
-            <Lightbulb size={18} />
-            <p>
-              “Wireless headphones under 3,000 birr with a microphone” helps us
-              more than just “headphones.”
-            </p>
-          </div>
-          <div className="expectations">
-            <h3>What happens next?</h3>
-            <p>
-              <Check size={16} />
-              We review your request.
-            </p>
-            <p>
-              <Check size={16} />
-              We may confirm details with you.
-            </p>
-            <p>
-              <Check size={16} />
-              If we find a match, you get an offer.
-            </p>
-            <small>
-              We can’t guarantee availability or a match within your budget. You
-              always choose whether to buy.
-            </small>
-          </div>
-        </aside>
+        <RequestSummary draft={draft} />
       </div>
     </main>
   );
