@@ -1,5 +1,5 @@
+import { Landing } from "./pages/Landing";
 import {
-  ArrowDownLeft,
   ArrowRight,
   ArrowUpRight,
   Check,
@@ -33,7 +33,7 @@ import { categories, dateLabel, money } from "./domain/models";
 import { RequestForm } from "./pages/RequestForm";
 import { RequestDetail } from "./pages/RequestDetail";
 
-function Brand() {
+export function Brand() {
   return (
     <Link to="/" className="brand" aria-label="FindIt home">
       <span className="brand-icon">
@@ -43,7 +43,7 @@ function Brand() {
     </Link>
   );
 }
-function DemoBanner() {
+export function DemoBanner() {
   const { repo, user, run, busy } = useApp();
   return repo.demo ? (
     <div className="demo-banner">
@@ -62,176 +62,6 @@ function DemoBanner() {
       </button>
     </div>
   ) : null;
-}
-function Landing() {
-  const { user } = useApp();
-  return (
-    <>
-      <DemoBanner />
-      <header className="landing-nav">
-        <Brand />
-        <nav>
-          <a href="#how-it-works">How it works</a>
-          <Link
-            className="button secondary small"
-            to={user ? "/app" : "/login"}
-          >
-            {user ? "My workspace" : "Sign in"} <ArrowUpRight size={16} />
-          </Link>
-        </nav>
-      </header>
-      <main>
-        <section className="hero">
-          <div className="hero-copy">
-            <span className="eyebrow">
-              <span className="live-dot" /> FOR THE CAMPUS, BY THE CAMPUS
-            </span>
-            <h1>
-              Hard to find?
-              <br />
-              Let’s <span>FindIt.</span>
-            </h1>
-            <p>
-              The calculator. The headphones. That very specific thing.
-              <br className="desktop-only" /> Tell us what you need and your
-              budget. We’ll do the looking.
-            </p>
-            <div className="hero-actions">
-              <Link className="button" to="/app/new">
-                Find something for me <ArrowUpRight size={19} />
-              </Link>
-              <a className="text-link" href="#how-it-works">
-                How it works <ArrowRight size={16} />
-              </a>
-            </div>
-            <div className="hero-foot">
-              <ShieldCheck size={17} /> Free to request. Your call to buy.
-            </div>
-          </div>
-          <div
-            className="hero-art"
-            aria-label="Illustration of a request becoming an offer"
-          >
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="art-spark">✳</div>
-            <div className="floating-label">
-              <span className="live-dot" /> A LITTLE LESS SEARCHING
-            </div>
-            <div className="example-request">
-              <div className="example-top">
-                <span className="mini-icon">
-                  <Search size={21} />
-                </span>
-                <span>THE SEARCH STARTS HERE</span>
-                <ArrowUpRight size={19} />
-              </div>
-              <div className="calculator" aria-hidden="true">
-                <div className="calc-screen">123.456</div>
-                <div className="calc-keys">
-                  {Array.from({ length: 20 }, (_, i) => (
-                    <i key={i} />
-                  ))}
-                </div>
-              </div>
-              <h3>A calculator for next semester.</h3>
-              <div className="example-meta">
-                <span>Study essentials</span>
-                <span>Within my budget</span>
-              </div>
-              <div className="example-bottom">
-                <span className="avatar-stack">
-                  <i>A</i>
-                  <i>F</i>
-                </span>
-                <span>Your request. Our next mission.</span>
-              </div>
-            </div>
-            <div className="match-card">
-              <span>
-                <Check size={21} />
-              </span>
-              <div>
-                <strong>Less searching. More studying.</strong>
-                <small>We’ll let you know when there’s a match.</small>
-              </div>
-            </div>
-            <span className="art-caption">A request can go a long way. ↗</span>
-          </div>
-        </section>
-        <section className="category-strip">
-          <span>WHAT’S ON YOUR LIST?</span>
-          {[
-            "Tech & gadgets",
-            "Study essentials",
-            "Everyday things",
-            "Something specific",
-          ].map((item) => (
-            <div key={item}>
-              <span>✳</span>
-              {item}
-            </div>
-          ))}
-        </section>
-        <section className="how-section" id="how-it-works">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">LESS RUNNING AROUND</span>
-              <h2>Your next find, in three steps.</h2>
-            </div>
-            <p>
-              You bring the wishlist.
-              <br />
-              We help with the legwork.
-            </p>
-          </div>
-          <div className="steps">
-            {[
-              {
-                icon: ClipboardList,
-                title: "Tell us what you need",
-                text: "Add the details, your budget in birr, and when you need it.",
-              },
-              {
-                icon: Compass,
-                title: "We go looking",
-                text: "We check options and get back to you if we find a suitable match.",
-              },
-              {
-                icon: ArrowDownLeft,
-                title: "You make the call",
-                text: "Review the item, total price, and terms. Accept only if it works for you.",
-              },
-            ].map((step, i) => (
-              <article key={step.title}>
-                <div className="step-top">
-                  <step.icon size={24} />
-                  <span>0{i + 1}</span>
-                </div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-        <section className="closing-call">
-          <div>
-            <span className="eyebrow">START WITH ONE THING</span>
-            <h2>What are you looking for?</h2>
-            <p>No commitment. No endless scrolling. Just a request.</p>
-          </div>
-          <Link className="button" to="/app/new">
-            Make a request <ArrowUpRight size={18} />
-          </Link>
-        </section>
-      </main>
-      <footer>
-        <Brand />
-        <span>Made for student life in Addis Ababa.</span>
-        <span>Availability isn’t guaranteed. You approve every offer.</span>
-      </footer>
-    </>
-  );
 }
 function Auth() {
   const { user, repo, run, busy, loading } = useApp();
