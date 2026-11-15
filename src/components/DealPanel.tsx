@@ -120,29 +120,40 @@ export function DealPanel({ deal, admin }: { deal: Deal; admin: boolean }) {
                 ))}
               </select>
             </Field>
-            <Field
-              label="2. Where is the item now?"
-              hint={
-                finished
-                  ? "This deal is closed. Its delivery status is locked."
-                  : deliveryOptions[status].help
-              }
-            >
-              <select
-                name="status"
-                value={status}
-                disabled={finished}
-                onChange={(event) =>
-                  setStatus(event.target.value as Deal["status"])
-                }
+            {finished ? (
+              <div className="deal-guide" role="note">
+                <strong>
+                  {deal.status === "completed"
+                    ? "2. Completed and locked"
+                    : "2. Cancelled and locked"}
+                </strong>
+                <p>
+                  {deal.status === "completed"
+                    ? "This deal was marked as delivered to the buyer. Delivery status can only be changed while a deal is open."
+                    : "This deal was cancelled. Its delivery status is now closed."}{" "}
+                  You can still update the buyer message below.
+                </p>
+              </div>
+            ) : (
+              <Field
+                label="2. Where is the item now?"
+                hint={deliveryOptions[status].help}
               >
-                {Object.entries(deliveryOptions).map(([value, option]) => (
-                  <option key={value} value={value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </Field>
+                <select
+                  name="status"
+                  value={status}
+                  onChange={(event) =>
+                    setStatus(event.target.value as Deal["status"])
+                  }
+                >
+                  {Object.entries(deliveryOptions).map(([value, option]) => (
+                    <option key={value} value={value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            )}
             <Field
               label={`3. Write an update for the buyer${needsNote ? " (required)" : " (optional)"}`}
               hint={
