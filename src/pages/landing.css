@@ -197,3 +197,170 @@
     font-size: 28px;
   }
 }
+.atelier-page {
+  background: #f9faf4;
+}
+.atelier-page .welcome-hero {
+  display: block;
+  text-align: center;
+  padding: 43px 0 30px;
+}
+.atelier-page .welcome-hero .eyebrow {
+  justify-content: center;
+}
+.atelier-page .welcome-hero h1 {
+  font-size: 68px;
+  letter-spacing: -3.4px;
+  margin: 18px 0 22px;
+}
+.atelier-page .welcome-hero h1 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  text-decoration: none;
+  color: #79974d;
+}
+.atelier-page .welcome-hero p {
+  font-size: 15px;
+}
+.atelier-page .welcome-hero .button {
+  margin: 23px 0 12px;
+}
+.atelier-showcase {
+  margin: 18px 0 0;
+  padding: 0;
+}
+.atelier-tickets {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  perspective: 1000px;
+  padding: 33px 10px 26px;
+}
+.atelier-tickets:before {
+  content: "";
+  position: absolute;
+  bottom: 20px;
+  width: min(70%, 520px);
+  height: 140px;
+  background: #e7efda;
+  border-radius: 50%;
+  filter: blur(25px);
+  pointer-events: none;
+}
+.atelier-ticket {
+  position: relative;
+  text-align: left;
+  width: 285px;
+  padding: 22px 24px;
+  background: #fff;
+  border: 1px solid #dce6ce;
+  box-shadow: 0 14px 30px #3a502617;
+  border-radius: 10px;
+  transform: rotate(-7deg) rotateY(12deg);
+  transition: transform 0.3s ease;
+}
+.atelier-ticket.atelier-response {
+  transform: rotate(6deg) rotateY(-12deg);
+  background: #eaf3dd;
+}
+.atelier-ticket .eyebrow {
+  justify-content: flex-start !important;
+  font-size: 9px;
+  letter-spacing: 1.1px;
+}
+.atelier-ticket h2 {
+  font-size: 22px;
+  letter-spacing: -0.7px;
+  margin: 15px 0 9px;
+}
+.atelier-page .atelier-ticket p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.ticket-price {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px dashed #d4dfc5;
+  padding-top: 14px;
+  margin-top: 17px;
+  font-size: 12px;
+}
+.ticket-price > span {
+  color: #728363;
+}
+.ticket-price strong {
+  font-weight: 600;
+}
+.atelier-showcase figcaption {
+  font-size: 10px;
+  color: #718362;
+  margin-top: 14px;
+}
+.atelier-tickets:hover .atelier-ticket {
+  transform: rotate(-3deg) translateY(-5px);
+}
+.atelier-tickets:hover .atelier-response {
+  transform: rotate(3deg) translateY(-5px);
+}
+.atelier-page .welcome-steps {
+  padding-top: 28px;
+}
+.atelier-page .welcome-close {
+  padding-bottom: 32px;
+}
+@media (max-width: 700px) {
+  .atelier-page .welcome-hero {
+    padding-top: 28px;
+  }
+  .atelier-page .welcome-hero h1 {
+    font-size: 47px;
+    letter-spacing: -2.2px;
+    line-height: 1.12;
+  }
+  .atelier-page .welcome-hero > div > p {
+    font-size: 14px;
+  }
+  .atelier-tickets {
+    flex-direction: column;
+    gap: 22px;
+    padding: 27px 0 20px;
+  }
+  .atelier-ticket {
+    width: min(100% - 20px, 310px);
+    transform: rotate(-3deg);
+  }
+  .atelier-ticket.atelier-response {
+    transform: rotate(3deg);
+  }
+  .atelier-showcase figcaption {
+    max-width: 280px;
+    margin: 12px auto 0;
+    line-height: 1.6;
+  }
+  .atelier-ticket .eyebrow {
+    font-size: 10px;
+  }
+  .atelier-page .welcome-steps {
+    gap: 25px;
+  }
+  .atelier-page .welcome-steps h2 {
+    font-size: 17px;
+  }
+  .atelier-page .landing-nav nav > a:first-child {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atelier-ticket {
+    transition: none;
+  }
+  .atelier-tickets:hover .atelier-ticket {
+    transform: rotate(-3deg);
+  }
+  .atelier-tickets:hover .atelier-response {
+    transform: rotate(3deg);
+  }
+}

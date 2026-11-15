@@ -7,7 +7,7 @@ import "./landing.css";
 export function Landing() {
   const { user } = useApp();
   return (
-    <div className="welcome-page">
+    <div className="welcome-page atelier-page">
       <DemoBanner />
       <header className="landing-nav">
         <Brand />
@@ -21,52 +21,54 @@ export function Landing() {
       <main className="welcome-main">
         <section className="welcome-hero">
           <div>
-            <span className="eyebrow">A buying desk for Addis students</span>
+            <span className="eyebrow">For students in Addis Ababa</span>
             <h1>
-              That thing
+              Can’t find it?
               <br />
-              you’ve been
-              <br />
-              <em>looking for.</em>
+              <em>We’ll look for you.</em>
             </h1>
             <p>
-              Tell us what it is and what you can spend.
+              Tell us what you want to buy and your budget in birr.
               <br />
-              We’ll look for it, check the details, and bring
-              <br className="desktop-only" /> you an offer you can say yes—or
-              no—to.
+              We find options and send you an offer. You decide.
             </p>
             <Link className="button" to="/app/new">
-              Tell us what you need <ArrowUpRight size={18} />
+              Request an item <ArrowUpRight size={18} />
             </Link>
-            <small>No payment to request. You decide before buying.</small>
+            <small>Free to request. No obligation to buy.</small>
           </div>
-          <figure className="request-desk">
-            <div className="paper-slip">
-              <div className="slip-heading">
-                <span>On the lookout</span>
-                <span>No. 001</span>
+          <figure className="atelier-showcase">
+            <div className="atelier-tickets">
+              <div className="atelier-ticket">
+                <span className="eyebrow">You ask / example</span>
+                <h2>A Casio calculator.</h2>
+                <p>
+                  Original. New or used.
+                  <br />
+                  Pickup near 5 Kilo.
+                </p>
+                <div className="ticket-price">
+                  <span>My budget</span>
+                  <strong>2,500 birr</strong>
+                </div>
               </div>
-              <blockquote>
-                “A calculator that’ll
-                <br />
-                get me through
-                <br />
-                engineering.”
-              </blockquote>
-              <p>
-                Casio fx-991EX or similar.
-                <br />
-                Original. New or used is fine.
-              </p>
-              <div className="slip-tags">
-                <span>Up to 2,500 birr</span>
-                <span>5 Kilo</span>
+              <div className="atelier-ticket atelier-response">
+                <span className="eyebrow">We find / example offer</span>
+                <h2>A possible match.</h2>
+                <p>
+                  Casio fx-991EX · New
+                  <br />
+                  Review the item and pickup terms.
+                </p>
+                <div className="ticket-price">
+                  <span>Total price</span>
+                  <strong>2,200 birr</strong>
+                </div>
               </div>
-              <span className="request-stamp">Request received</span>
-              <p className="pencil-note">The little details help us find it.</p>
             </div>
-            <figcaption>An example request. What’s on your list?</figcaption>
+            <figcaption>
+              Illustrative item and prices. Availability isn’t guaranteed.
+            </figcaption>
           </figure>
         </section>
         <section
@@ -76,14 +78,17 @@ export function Landing() {
         >
           {[
             [
-              "Your list.",
-              "The item, your budget, and the details that matter.",
+              "Ask for something specific.",
+              "The item you want, your budget, and the details that matter.",
             ],
             [
-              "Our search.",
+              "Let us do the looking.",
               "We check options and contact you if something fits.",
             ],
-            ["Your decision.", "A clear total price. No pressure to say yes."],
+            [
+              "Buy only when it fits.",
+              "You approve the actual item and total price.",
+            ],
           ].map(([title, text], i) => (
             <article key={title}>
               <h2>
